@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+
+@layer utilities{
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+}
+@layer components{
+    .date--episode{
+        @apply w-[90px] h-[30px] rounded-xl flex justify-center items-center bg-lessblack
+        text-white text-[10px] onmedium:w-[120px] onmedium:text-sm 
+
+        
+    }
+}
+
