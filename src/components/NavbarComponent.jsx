@@ -23,11 +23,14 @@ export default NavbarComponent
 
 
 
-export function SearchBar({numcharacter}){
+export function SearchBar({numcharacter,query,setQuery}){
  
   return(
     <div className="input--navbar flex gap-x-16 justify-center items-center">     
-         <input type="search" className=' h-[30px] placeholder:text-black placeholder:text-[12px] bg-gray-200 w-[190px] rounded-lg p-4 ' placeholder="search here..." />
+         <input type="search"
+          value={query} 
+          onChange={(e)=>setQuery(e.target.value)} 
+          className=' h-[30px] placeholder:text-black placeholder:text-[12px] bg-gray-200 w-[190px] rounded-lg p-4 ' placeholder="search here..." />
          <h1 className='text-md'>Found {numcharacter} characters</h1>
     </div>
   )

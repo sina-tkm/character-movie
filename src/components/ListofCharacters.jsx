@@ -1,10 +1,14 @@
 import { EyeIcon } from "@heroicons/react/16/solid"
+import LoadingFetch from "./loadingfetch";
 
 
-function ListofCharacters({characters}) {
+function ListofCharacters({characters,isLoading}) {
   return ( 
-     <div className="w-[40%] flex flex-col gap-y-4"> 
-      {characters.map((item)=>{
+     <div className="w-[40%] flex flex-col gap-y-4 p-[10px] webkit--class"> 
+      {isLoading ? (
+        <LoadingFetch/>
+      ) :
+      characters.map((item)=>{
         return(
           <Character key={item.id} item={item}/>
         )
@@ -17,8 +21,8 @@ export default ListofCharacters;
 
 function Character({item}){
   return(
-    <div>
-      <div className="group hover:bg-concrete w-full rounded-lg bg-blueblack flex-col gap-y-4 lg:flex-row lg:h-[100px]  py-[12px] px-[18px] flex gap-x-4 justify-between relative transition-all duration-200 ease-out ">
+    <div >
+      <div className="group hover:bg-concrete w-full  rounded-lg bg-blueblack flex-col gap-y-4 lg:flex-row lg:h-[100px]  py-[12px] px-[18px] flex gap-x-4 justify-between relative transition-all duration-200 ease-out ">
      <img className='w-full h-auto object-cover rounded-lg ' src={item.image} alt={item.name} />
       <div className="h-full flex flex-col justify-between  py-2 lg:mr-4 xl:mr-56 gap-y-3 group"  >
       <h3 className="flex whitespace-nowrap">
