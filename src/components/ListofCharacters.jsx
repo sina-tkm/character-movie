@@ -1,8 +1,12 @@
 import { EyeIcon } from "@heroicons/react/16/solid"
 import LoadingFetch from "./loadingfetch";
+import { useState } from "react";
+import { EyeSlashIcon } from "@heroicons/react/16/solid";
 
 
-function ListofCharacters({characters,isLoading}) {
+function ListofCharacters({characters,isLoading,onSelect,selectId}) {
+
+
   return ( 
      <div className="w-[40%] flex flex-col gap-y-4 p-[10px] webkit--class"> 
       {isLoading ? (
@@ -10,7 +14,7 @@ function ListofCharacters({characters,isLoading}) {
       ) :
       characters.map((item)=>{
         return(
-          <Character key={item.id} item={item}/>
+          <Character key={item.id} item={item} onSelect={onSelect} selectId={selectId} />
         )
       })}
     </div>
@@ -19,7 +23,7 @@ function ListofCharacters({characters,isLoading}) {
 
 export default ListofCharacters;
 
-function Character({item}){
+function Character({item,onSelect,selectId}){
   return(
     <div >
       <div className="group hover:bg-concrete w-full  rounded-lg bg-blueblack flex-col gap-y-4 lg:flex-row lg:h-[100px]  py-[12px] px-[18px] flex gap-x-4 justify-between relative transition-all duration-200 ease-out ">
@@ -27,7 +31,7 @@ function Character({item}){
       <div className="h-full flex flex-col justify-between  py-2 lg:mr-4 xl:mr-56 gap-y-3 group"  >
       <h3 className="flex whitespace-nowrap">
         <span className='group-hover:text-black'>{item.gender ==="Male" ? "👱🏻‍♂️" : "👱‍♀️"}</span>
-        <span className="text-lg text-white group-hover:text-black">{item.name}</span>
+        <span className="text-lg text-white group-hover:text-black w-[180px]">{item.name}</span>
       </h3>
       <h6 className="text-[14px]  whitespace-nowrap text-white group-hover:text-black flex text-center ">
         <span>{item.status === "Dead" ? "💔" : "🧡"}-</span>
@@ -36,7 +40,11 @@ function Character({item}){
       </h6>
    </div>
     <div className="icon--div h-full flex items-center"> 
-      <EyeIcon className="w-[24px] h-[24px] text-rose-700 absolute right-3 bottom-12 md:bottom-10 "/>
+
+    <button className="eye-Icon" onClick={()=>onSelect(item.id)}>
+    {selectId === item.id ? <EyeSlashIcon /> : <EyeIcon/>}
+    </button>
+  
     </div>
    </div>
   </div>

@@ -11,6 +11,9 @@
         text-white text-[10px] onmedium:w-[120px] onmedium:text-sm whitespace-nowrap hover:bg-concrete transition-all duration-300 hover:text-black
 
         
+    } 
+    .eye-Icon{
+     @apply w-[24px] h-[24px] text-rose-700 absolute right-3 bottom-12 md:bottom-10 
     }
     
 }
