@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { character } from "../../data/data";
+import toast from "react-hot-toast";
 
 
-function ShowCharacter({selectId,setEpisode}) {
+
+function ShowCharacter({selectId,setEpisode,handleFavorite,addedFave}) {
 const [loading,setLoading] =useState(false)
 const [namecha,setCharacterId] =useState(null);
 
@@ -15,24 +16,35 @@ const [namecha,setCharacterId] =useState(null);
        try {
         setLoading(true)
         const {data} = await axios.get(`https://rickandmortyapi.com/api/character/${selectId}`
-            
+          
         );
         setCharacterId(data)
-
+       
         const episodeId = data.episode.map((item)=>item.split('/').at(-1));
         const {data : episodeData} = await axios.get (`https://rickandmortyapi.com/api/episode/${episodeId}`)
-        setEpisode([episodeData].flat().slice(0,5))
+        setEpisode([episodeData].flat().slice(0,5))  
+         
         }
+     
        catch (error) {
         console.log(error.response.data.error)   
+        toast.error(error.response.data.error)
         }finally{
         setLoading(false)
         }
-        
-
     }
-       if (selectId) fetchEpisode() 
+   
+
+    if (selectId) fetchEpisode() 
+
         },[selectId])
+
+
+     if(!setLoading){
+        return(
+            <div className="spinner"></div>
+        )
+    }
         if(!namecha || !selectId){
             return(
                 <div className='text-white'> please select a character</div>
@@ -50,10 +62,10 @@ const [namecha,setCharacterId] =useState(null);
     </div>
     <div className="name--character flex flex-col justify-between py-2 w-[60%]">
         <div className="py-2 pl-2"> 
-        <h1 className="text-[18px] whitespace-nowrap pl-1 text-white font-semibold w-[220px] overflow-hidden justify-center items-center">
+        <h1 className="text-[24px] whitespace-nowrap pl-1 text-white font-semibold w-[70%] overflow-hidden justify-center items-center">
             <marquee direction = "right">{namecha.gender ==="Male" ?"👱🏻‍♂️" : "👱‍♀️"}{namecha.name}</marquee>
         </h1>
-        <h5 className="explanation--character pr-12 text-sm text-white whitespace-nowrap">
+        <h5 className="explanation--character pr-12 text-md text-white whitespace-nowrap">
             <span>{namecha.status==="Dead" ? "💔":"🧡"}-</span>
             <span>{namecha.status}:</span>
             <span>{namecha.species}</span>
@@ -65,14 +77,16 @@ const [namecha,setCharacterId] =useState(null);
 
         </div>
         <div>
-            <p href="#" className=" ml-3 mb-2 w-[80px] md:w-[110px] bg-lessblack text-white rounded-md text-[10px] h-[28px] flex justify-center items-center hover:bg-concrete transition-all duration-300 hover:text-black">Add To Favorite</p>
+            {addedFave ? <p> this character added✅</p> : <button href="#" onClick={()=>handleFavorite(namecha)} className=" ml-3 mb-2 w-[80px] md:w-[110px] bg-lessblack text-white rounded-md text-[10px] h-[28px] flex justify-center items-center hover:bg-concrete transition-all duration-300 hover:text-black">Add To Favorite</button>} 
         </div>
+        
     </div>
 </div>
    )
 }
 
 export default ShowCharacter
+
 
 
 
