@@ -1,7 +1,9 @@
 import { HeartIcon } from "@heroicons/react/16/solid"
 
 
-function NavbarComponent({children,numOfFave,handleFaveShow}) {
+
+function NavbarComponent({children,numOfFave,onOpen}) {
+
   return (
     <nav className=" mx-24 my-4 rounded-lg flex justify-between p-4 bg-blueblack relative">
       <div className="logo--image">
@@ -9,11 +11,9 @@ function NavbarComponent({children,numOfFave,handleFaveShow}) {
         </div>
         {children}
         <div className="icon--heart">
-            <HeartIcon className='w-[30px] h-[30px] text-rose-600' onClick={handleFaveShow}/>
-            <span className= 'w-4 h-4 bg-red-500 rounded-full text-sm flex justify-center items-center absolute right-3 top-3'>{numOfFave}</span>
-           
-        </div>
-        
+        <HeartIcon className='w-[30px] h-[30px] text-rose-600' onClick={()=>onOpen((is)=>!is)}/>
+        <span className= 'w-4 h-4 bg-red-500 rounded-full text-sm flex justify-center items-center absolute right-3 top-3'>{numOfFave}</span> 
+      </div>
     </nav>
   )
 }

@@ -12,22 +12,18 @@ function ListofEpisode({episode,selectId}) {
   
   let sortedList;
   if(sortby){
-   
     sortedList = [...episode].sort((a,b)=>new Date(a.created)  - new Date(b.created)
-      
-      
     )
   }else{
-    sortedList = [...episode].sort((a,b)=>new Date(b.created)  - new Date(a.created)
-      
+    sortedList = [...episode].sort((a,b)=>new Date(b.created)  - new Date(a.created)  
     )
   }
 
-if(!selectId){
-  return(
-    <div></div>
-  )
-}
+if(!selectId) return null
+  
+  
+
+
   return (
     <div className=" h-fit relative bg-blueblack p-4 w-full   rounded-lg  flex flex-col gap-y-4 ">
        <h1 className='text-gray-400 text-[20px] whitespace-nowrap'>list ofepisodes:</h1>
