@@ -4,29 +4,27 @@ import ShowCharacter from './components/ShowCharacter';
 import ListofEpisode from './components/ListofEpisode';
 import FavoriteList from './components/FavoriteList';
 import './App.css';
-import { useEffect, useState } from 'react';
-import { data } from 'autoprefixer';
-import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
+import {  useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import useCharacters from './hooks/useCharacters';
+import uselocaleStorage from './hooks/localeStorage';
+
 
 
 
 
 function App() {
-  const [characters,setcharacters] =useState([]);
-  const [isLoading,setIsLoading]=useState(false)
+  
   const [query,setQuery] = useState("")
+  const {characters,isLoading}=useCharacters('https://rickandmortyapi.com/api/character?name',query)
   const [selectId,setSelectId]=useState("")
   const [episode,setEpisode] = useState([])
-  const [favorite,setFavorite] = useState(()=>JSON.parse(localStorage.getItem("FAVORITE")) || [])
+  const [favorite,setFavorite] = uselocaleStorage("Favorite",[])
   const [favebox,setFaveBox] = useState(false)
 
 
 //delete-favebox
 const handleDelete = (delitem)=>{setFavorite(prevNote => prevNote.filter(n=> n.id!== delitem))}
-
-//save-localStorage
-useEffect(()=>{ localStorage.setItem("FAVORITE",JSON.stringify(favorite))},[favorite])
 
  //insertItem-favorite
 const handleFavorite = (item)=>{setFavorite(prevFav =>[...prevFav,item]);}
@@ -37,38 +35,7 @@ const addedFave = favorite.map(item=>item.id).includes(selectId)
 //updating-showcharacter
 const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
 
-    useEffect(()=>{ 
-    const controller = new AbortController();
-    const signal = controller.signal;
-    async function fetchData(){
-    try {
-    setIsLoading(true)
-      const {data} = await axios.get(
-      `https://rickandmortyapi.com/api/character?name=${query}`
-      ,{signal}
-      );
-    setcharacters(data.results.slice(0,5)) 
-    } catch (err) {
-    if(axios.isCancel()){
-    setcharacters([])
-    toast.error(err.response.data.error)
-         
-        }
-    }finally{
-    setIsLoading(false)
-    }
-   }
-    if(query.length < 3){ 
-      setcharacters([])
-      return;
-      }
-    fetchData()
-    return ()=>{
-    controller.abort()
-    }
-
   
-  },[query])
   
 
 
@@ -94,12 +61,14 @@ const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
      />
      <main className="character--detail w-[70%] flex flex-col lg:flex-col  xl:w-[100%] gap-x-4 gap-y-4 ">
      <ShowCharacter
+      query={query}
       addedFave={addedFave} 
       characters= {characters} 
       selectId={selectId}  
       setEpisode={setEpisode} 
       handleFavorite={handleFavorite}/>
      <ListofEpisode 
+     query={query}
       className='flex xl:flex-row' 
       episode={episode} 
       selectId={selectId}/> 

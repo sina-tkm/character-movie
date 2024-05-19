@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 
 
-function ShowCharacter({selectId,setEpisode,handleFavorite,addedFave}){
+function ShowCharacter({selectId,setEpisode,handleFavorite,addedFave,query}){
 const [loading,setLoading]=useState(true)
 const [namecha,setCharacterId] =useState(null);
 
@@ -33,8 +33,13 @@ const [namecha,setCharacterId] =useState(null);
     }
       if (selectId) fetchEpisode()
 
-        },[selectId])
+    },[selectId])
 
+
+
+    if(query.length <3){
+        return null
+    }
 
     if(!setLoading){
 
@@ -45,9 +50,12 @@ const [namecha,setCharacterId] =useState(null);
 
     return(<div className='text-white'> please select a character</div>)
     }
+
+
+    
         
      
-      
+  
      
 
         return(

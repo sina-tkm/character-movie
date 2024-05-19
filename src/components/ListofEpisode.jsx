@@ -6,7 +6,7 @@ import { useState } from "react"
 
 
 
-function ListofEpisode({episode,selectId}) {
+function ListofEpisode({episode,selectId,query}) {
   const [sortby,setSortBy] = useState(true)
  
   
@@ -22,7 +22,9 @@ function ListofEpisode({episode,selectId}) {
 if(!selectId) return null
   
   
-
+if(query.length<3){
+  return null
+}
 
   return (
     <div className=" h-fit relative bg-blueblack p-4 w-full   rounded-lg  flex flex-col gap-y-4 ">
