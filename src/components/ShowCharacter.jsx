@@ -1,63 +1,24 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import toast from "react-hot-toast";
+function ShowCharacter({selectId,isloading,handleFavorite,addedFave,query,namecha,loading}){
 
-
-
-function ShowCharacter({selectId,setEpisode,handleFavorite,addedFave,query}){
-const [loading,setLoading]=useState(true)
-const [namecha,setCharacterId] =useState(null);
-
-
-
-
-    useEffect(()=>{
-        async function fetchEpisode(){
-       try {
-        setLoading(true)
-        const {data} = await axios.get(`https://rickandmortyapi.com/api/character/${selectId}` 
-        );
-        setCharacterId(data)
-
-        const episodeId = data.episode.map((item)=>item.split('/').at(-1));
-        const {data : episodeData} = await axios.get (`https://rickandmortyapi.com/api/episode/${episodeId}`)
-        setEpisode([episodeData].flat().slice(0,5))  
-
+    if(loading){
+    return<div className="flex gap-x-3">
+            <div className="text-white">loading</div>
+            <div className="spinner"></div> 
+        </div>
         }
-        catch (error) {
-        console.log(error.response.data.error)   
-        toast.error(error.response.data.error)
-        }finally{
-        setLoading(false)
-        }
-    }
-      if (selectId) fetchEpisode()
-
-    },[selectId])
 
 
-
-    if(query.length <3){
+    if(query.length <1){
         return null
     }
 
-    if(!setLoading){
+   
 
-    return(<div className="spinner"></div>)
-    }
-
-    if(!namecha || !selectId){
-
-    return(<div className='text-white'> please select a character</div>)
-    }
-
-
+    if(!namecha || !selectId ){ 
+        return <div className='text-white'> please select a character</div>
+     }
     
-        
-     
-  
-     
-
+    
         return(
     <div className="flex gap-x-2 bg-blueblack rounded-lg w-full  lg:w-[100%] h-[220px]">
     <div className="show--image">

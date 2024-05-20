@@ -8,6 +8,7 @@ import {  useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import useCharacters from './hooks/useCharacters';
 import uselocaleStorage from './hooks/localeStorage';
+import useEpisode from './hooks/useEpisode';
 
 
 
@@ -18,7 +19,7 @@ function App() {
   const [query,setQuery] = useState("")
   const {characters,isLoading}=useCharacters('https://rickandmortyapi.com/api/character?name',query)
   const [selectId,setSelectId]=useState("")
-  const [episode,setEpisode] = useState([])
+  const {namecha,episode,loading} = useEpisode(selectId)
   const [favorite,setFavorite] = uselocaleStorage("Favorite",[])
   const [favebox,setFaveBox] = useState(false)
 
@@ -61,13 +62,17 @@ const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
      />
      <main className="character--detail w-[70%] flex flex-col lg:flex-col  xl:w-[100%] gap-x-4 gap-y-4 ">
      <ShowCharacter
+      namecha={namecha}
+      loading={loading}
       query={query}
+      isLoading={isLoading}
       addedFave={addedFave} 
       characters= {characters} 
       selectId={selectId}  
-      setEpisode={setEpisode} 
+      // setEpisode={setEpisode} 
       handleFavorite={handleFavorite}/>
      <ListofEpisode 
+      
      query={query}
       className='flex xl:flex-row' 
       episode={episode} 

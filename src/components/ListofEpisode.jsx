@@ -18,13 +18,13 @@ function ListofEpisode({episode,selectId,query}) {
     sortedList = [...episode].sort((a,b)=>new Date(b.created)  - new Date(a.created)  
     )
   }
-
+if(query.length<1){
+  return null
+}
 if(!selectId) return null
   
   
-if(query.length<3){
-  return null
-}
+
 
   return (
     <div className=" h-fit relative bg-blueblack p-4 w-full   rounded-lg  flex flex-col gap-y-4 ">

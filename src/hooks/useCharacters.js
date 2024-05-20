@@ -29,7 +29,7 @@ export default function useCharacters(url,query){
         setIsLoading(false)
         }
        }
-        if(query.length < 3){ 
+        if(query.length < 1){ 
           setcharacters([])
           return;
           }
