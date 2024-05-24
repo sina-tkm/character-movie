@@ -1,4 +1,4 @@
-function ShowCharacter({selectId,isloading,handleFavorite,addedFave,query,namecha,loading}){
+function ShowCharacter({selectId,handleFavorite,addedFave,query,namecha,loading}){
 
     if(loading){
     return<div className="flex gap-x-3">
@@ -15,18 +15,18 @@ function ShowCharacter({selectId,isloading,handleFavorite,addedFave,query,namech
    
 
     if(!namecha || !selectId ){ 
-        return <div className='text-white'> please select a character</div>
+        return <div className='text-white transition-all duration-100'> please select a character</div>
      }
     
     
         return(
-    <div className="flex gap-x-2 bg-blueblack rounded-lg w-full  lg:w-[100%] h-[220px]">
+    <div className=" transition-all duration-200 flex gap-x-2 bg-blueblack rounded-lg w-full  lg:w-[100%] h-[220px]">
     <div className="show--image">
         <img src={namecha.image} alt={namecha.name} className=" rounded-lg w-[200px] h-full object-cover"/>
     </div>
     <div className="name--character flex flex-col justify-between py-2 w-[60%]">
         <div className="py-2 pl-2"> 
-        <h1 className="text-[24px] whitespace-nowrap pl-1 text-white font-semibold w-[70%] overflow-hidden justify-center items-center">
+        <h1 className="text-[18px]  sm:text-[24px] whitespace-nowrap pl-1 text-white font-semibold w-[80%] sm:w-[70%] overflow-hidden justify-center items-center">
             <marquee direction = "right">{namecha.gender ==="Male" ?"👱🏻‍♂️" : "👱‍♀️"}{namecha.name}</marquee>
         </h1>
         <h5 className="explanation--character pr-12 text-md text-white whitespace-nowrap">

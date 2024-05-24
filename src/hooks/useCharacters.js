@@ -18,7 +18,13 @@ export default function useCharacters(url,query){
           `${url}=${query}`
           ,{signal}
           );
-        setcharacters(data.results.slice(0,5)) 
+      
+            setcharacters(data.results.slice(0,3)) 
+         
+          
+          
+
+        
         } catch (err) {
         if(!axios.isCancel()){
         setcharacters([])

@@ -4,7 +4,7 @@ import { TrashIcon } from "@heroicons/react/16/solid"
 function FavoriteList({favorite,favebox,onOpen,onDelete}) {
 if(!favebox) return null
   return (
-<div className=" absolute w-[30%] mx-auto h-[400px] bg-lessblack rounded-lg p-[10px] overflow-y-scroll scrollbar border-2">
+<div className="absolute w-[100%] top-8 sm:w-[30%] mx-auto h-[400px] bg-lessblack rounded-lg p-[10px] overflow-y-scroll scrollbar border-2">
     <div className="flex item-center justify-between border-b-2"> 
         <h1 className="text-white">List Of Favorite</h1>
         <XMarkIcon onClick={()=>onOpen(false)} className="h-[30px] w-[30px] text-red-400"/>

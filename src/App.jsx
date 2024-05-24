@@ -53,14 +53,21 @@ const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
      setQuery={setQuery}
      />
      </NavbarComponent>
-     <div className="main--component flex justify-center mx-24 gap-x-4">
+     <div className="main--component ">
      <ListofCharacters
      characters={characters}
      isLoading={isLoading} 
      onSelect ={onselect}
      selectId={selectId}
+     namecha={namecha}
+     query={query}
+     addedFave={addedFave}
+     handleFavorite={handleFavorite}
+     loading={loading}
      />
-     <main className="character--detail w-[70%] flex flex-col lg:flex-col  xl:w-[100%] gap-x-4 gap-y-4 ">
+     
+    
+     <main className="character--detail w-full mt-4 sm:mt-0 sm:w-[70%] flex flex-col lg:flex-col  xl:w-[100%] gap-x-4 gap-y-4 ">
      <ShowCharacter
       namecha={namecha}
       loading={loading}
@@ -69,7 +76,6 @@ const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
       addedFave={addedFave} 
       characters= {characters} 
       selectId={selectId}  
-      // setEpisode={setEpisode} 
       handleFavorite={handleFavorite}/>
      <ListofEpisode 
       
@@ -78,13 +84,14 @@ const onselect = (id)=>{setSelectId(prevId => prevId === id ? null : id)}
       episode={episode} 
       selectId={selectId}/> 
      </main>
-     <FavoriteList
+     <FavoriteList 
      onDelete={handleDelete}
      onOpen= {setFaveBox} 
      favorite={favorite} 
      favebox={favebox}
     />
     </div>
+    
 </section>
   )
 }
