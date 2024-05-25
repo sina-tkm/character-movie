@@ -27,7 +27,7 @@ if(!selectId) return null
 
 
   return (
-    <div className=" h-fit relative bg-blueblack p-[24px] w-full   rounded-lg  flex flex-col gap-y-4 transition-all duration-200 ">
+    <div className=" h-fit relative bg-blueblack p-[14px] w-full   rounded-lg  flex flex-col gap-y-4 transition-all duration-200 ">
        <h1 className='text-gray-400 text-[20px] whitespace-nowrap'>list ofepisodes:</h1>
       <button onClick={()=>setSortBy((is)=>!is)}>
         <ArrowUpCircleIcon className="w-[24px] h-[24px] text-gray-400 absolute right-[20px] top-8 transition-all ease-in " style={{rotate:sortby ? "0deg" : "180deg"}}  />

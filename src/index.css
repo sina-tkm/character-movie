@@ -13,11 +13,11 @@
         
     } 
     .main--component{
-      @apply flex flex-col sm:flex-row  justify-center  mx-8   sm:mx-16 md:mx-24 gap-x-4 relative
+      @apply flex flex-col sm:flex-row  justify-center mx-6  sm:mx-16  relative gap-x-4
     }
 
     .eye-Icon{
-     @apply bottom-10 right-1 w-[16px] h-[16px] md:w-[24px] md:h-[24px] text-rose-700 absolute sm:right-3  md:bottom-10 
+     @apply bottom-2 right-2 w-[24px] h-[24px] md:w-[24px] md:h-[24px] text-rose-700 absolute sm:right-3  sm:bottom-10 
     }
     
 }
@@ -29,7 +29,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgb(223, 230, 233);
+      background: rgb(246, 229, 141);
       transform: rotate(0deg);
       z-index: -1;
       transition: all 0.3s ease-in-out;
@@ -37,8 +37,11 @@
       transform: rotate(0deg);
 
    }
+   .bg--body{
+      background: linear-gradient(#e66465, #9198e5);
+   }
    .list--character:hover::before{
-      transform: rotate(3deg);
+      transform: rotate(2deg);
    }
     *{
         margin: 0;

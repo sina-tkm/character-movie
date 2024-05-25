@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 export default function useCharacters(url,query){
         const [characters,setcharacters] =useState([]);
         const [isLoading,setIsLoading]=useState(false)
+        
 
     useEffect(()=>{ 
        
@@ -14,12 +15,22 @@ export default function useCharacters(url,query){
         async function fetchData(){
         try {
         setIsLoading(true)
-          const {data} = await axios.get(
+      if(window.innerWidth>=842){
+        const {data} = await axios.get(
+          `${url}=${query}`
+          ,{signal}
+          );
+      
+            setcharacters(data.results.slice(0,5)) 
+      }else{
+
+        const {data} = await axios.get(
           `${url}=${query}`
           ,{signal}
           );
       
             setcharacters(data.results.slice(0,3)) 
+      }
          
           
           

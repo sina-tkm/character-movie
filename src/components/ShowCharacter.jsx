@@ -15,7 +15,7 @@ function ShowCharacter({selectId,handleFavorite,addedFave,query,namecha,loading}
    
 
     if(!namecha || !selectId ){ 
-        return <div className='text-white transition-all duration-100'> please select a character</div>
+        return <div className='text-white transition-all duration-100 sm:ml-[40px]'>select a character</div>
      }
     
     
